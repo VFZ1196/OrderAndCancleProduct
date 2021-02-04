@@ -3,7 +3,6 @@ package ApiToOrderProduct.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +29,7 @@ public class MobileController {
 	}
 	
 	@GetMapping("/mobile/{id}")
-	public ResponseEntity<MobileCart> getOrderDetails(@PathVariable int id){
+	public MobileCart getOrderDetails(@PathVariable int id){
 		return mobileService.getOrderDetails(id);
 			
 	}

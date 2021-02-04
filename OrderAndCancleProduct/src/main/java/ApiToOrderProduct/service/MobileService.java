@@ -1,10 +1,8 @@
 package ApiToOrderProduct.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import ApiToOrderProduct.model.MobileCart;
@@ -12,12 +10,14 @@ import ApiToOrderProduct.repository.MobileRepository;
 
 @Service
 public class MobileService {
-	
+
+	private static final String HttpConnectionParams = null;
+	private static final String httpParameters = null;
 	@Autowired
 	private MobileRepository mobileRepository;
 
 	public MobileCart addMobileInfo(MobileCart mobileCart) {
-		
+
 		return mobileRepository.save(mobileCart);
 	}
 
@@ -25,13 +25,24 @@ public class MobileService {
 		return mobileRepository.findAll();
 	}
 
-	public ResponseEntity<MobileCart> getOrderDetails(int id) {
-		Optional<MobileCart> user = mobileRepository.findById(id);
-		if(user.isPresent()) {
-	        return ResponseEntity.ok().body(user.get());
-	    } else {
-	        return ResponseEntity.notFound().build();
-	    }
+	public MobileCart getOrderDetails(int id) {
+
+		MobileCart cart = mobileRepository.findById(id).get();
+
+		try {
+			
+			if (cart.isPlaced() == true) {
+				System.out.println("Order Placed");
+				//HttpConnectionParams.setConnectionTimeout( httpParameters, 60000 * 5 );
+
+			} else {
+				System.out.println("Order not placed");
+			}
+		} catch (Exception ex) {
+			
+		}
+		
+		return null;
 	}
 
 }
