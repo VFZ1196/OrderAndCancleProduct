@@ -11,8 +11,6 @@ import ApiToOrderProduct.repository.MobileRepository;
 @Service
 public class MobileService {
 
-	private static final String HttpConnectionParams = null;
-	private static final String httpParameters = null;
 	@Autowired
 	private MobileRepository mobileRepository;
 
@@ -26,23 +24,19 @@ public class MobileService {
 	}
 
 	public MobileCart getOrderDetails(int id) {
+		
 
 		MobileCart cart = mobileRepository.findById(id).get();
 
-		try {
+		if (cart.isPlaced() == true) {
 			
-			if (cart.isPlaced() == true) {
-				System.out.println("Order Placed");
-				//HttpConnectionParams.setConnectionTimeout( httpParameters, 60000 * 5 );
+			System.out.println("Order Placed");
 
-			} else {
-				System.out.println("Order not placed");
-			}
-		} catch (Exception ex) {
-			
+		} else {
+			System.out.println("Order not placed");
 		}
 		
-		return null;
+		return cart;
 	}
 
 }

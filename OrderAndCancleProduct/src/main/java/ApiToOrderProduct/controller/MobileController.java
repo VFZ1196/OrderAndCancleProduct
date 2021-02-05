@@ -1,6 +1,7 @@
 package ApiToOrderProduct.controller;
 
 import java.util.List;
+import java.util.TimerTask;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ import ApiToOrderProduct.model.MobileCart;
 import ApiToOrderProduct.service.MobileService;
 
 @RestController
-public class MobileController {
+public class MobileController extends TimerTask {
 	
 	@Autowired
 	private MobileService mobileService;
@@ -28,8 +29,20 @@ public class MobileController {
 		return mobileService.getInfoOfMobile();
 	}
 	
+	@Override
+	public void run() {
+		try {
+			getOrderDetails(0);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@GetMapping("/mobile/{id}")
-	public MobileCart getOrderDetails(@PathVariable int id){
+	public MobileCart getOrderDetails(@PathVariable int id) throws InterruptedException{
+		
+		Thread.sleep(10000);
+
 		return mobileService.getOrderDetails(id);
 			
 	}
