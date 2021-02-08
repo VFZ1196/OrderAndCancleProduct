@@ -42,9 +42,10 @@ public class MobileService extends TimerTask{
 		if(cart.isPlaced()==false) {
 			cart.setPlaced(true);
 			System.out.println("Order Placed");
-			TimeUnit.SECONDS.sleep(5);
+			
 		}
 
+		TimeUnit.SECONDS.sleep(5);
 		MobileCart update = mobileRepository.save(cart);
 		return ResponseEntity.ok(update);
 	}
