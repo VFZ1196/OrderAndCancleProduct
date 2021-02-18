@@ -45,9 +45,9 @@ public class MobileService extends TimerTask{
 			
 		}
 
-		TimeUnit.SECONDS.sleep(5);
+		//TimeUnit.SECONDS.sleep(5);
 		MobileCart update = mobileRepository.save(cart);
 		return ResponseEntity.ok(update);
 	}
-
+ 
 }
